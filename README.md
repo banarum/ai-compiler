@@ -7,3 +7,5 @@ Then create 'credentials.py' inside the project root directory with the content
 {
   "api_key": "YOUR-OPEN-AI-KEY"
 }
+
+Run main.py with your own source
