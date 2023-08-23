@@ -1,0 +1,26 @@
+{
+  "languages": [
+    "javascript",
+    "python",
+    "dart",
+    "java",
+    "c++",
+    "c#"
+  ],
+  "model": "gpt-3.5-turbo",
+  "temperature": 0,
+  "top_p": 1,
+  "frequency_penalty": 0,
+  "presence_penalty": 0,
+  "role_prompt": "You must only provide code as an answer. You dont write anything but code. You cant communicate with the user in any other way. and remove the comments from the code",
+  "messages": [
+    {
+      "role": "system",
+      "content": "\n        1. You must write program in JavaScript.\n    "
+    },
+    {
+      "role": "user",
+      "content": "\n    1. Create a function which takes a string in seconds and returns a string in 00:00:00 format using local timezone.\n    2. Call this function with the current system time in seconds.\n    3. Print the result.\n    4. Make all function variables with underscores.\n    "
+    }
+  ]
+}
