@@ -1,0 +1,8 @@
+I have image stored on url http://picsum.photos/300/300?ref=1
+I want to change it's hue to 90 degree.
+I want to increase it's saturation to 1.1 times.
+I want to out put image to folder named "output" in my project.
+Also save the original image to the same folder.
+Ask user to enter a number between 0 and 1.
+If the number is 0, show the original image
+If the number is 1, show the output image

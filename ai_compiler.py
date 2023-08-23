@@ -4,6 +4,7 @@ import openai
 
 OUTPUT_FOLDER = 'out/'
 
+
 class AICompiler:
     def __init__(self, path, open_ai_key):
         openai.api_key = open_ai_key
@@ -52,15 +53,32 @@ class AICompiler:
             code = AICompiler._extract_code(response['choices'][0]['message']['content'])
             outfile.write(code)
 
+    def _create_program(self, messages):
+        return {
+            "languages": ["javascript", "python", "dart", "java", "c++", "c#"],
+            "model": "gpt-3.5-turbo",
+            "temperature": 0,
+            "top_p": 1,
+            "frequency_penalty": 0,
+            "presence_penalty": 0,
+            "role_prompt": self.role_prompt,
+            "messages": messages
+        }
+
+    def write_and_compile_program(self, name, messages, extension):
+        program = self._create_program(messages)
+        if os.path.exists(self.path + name + '.ai.json'):
+            with open(self.path + name + '.ai.json', 'r') as file:
+                # if program is equal to the one we want to write, do nothing compare by text
+                if file.read() == json.dumps(program):
+                    return False
+        self.write_program(name, messages)
+        self.compile_program(name + '.ai.json', name + '.ai.' + extension)
+
     def write_program(self, name, messages):
+        obj = self._create_program(messages)
+        # if program previously existed, read it
+
+
         with open(self.path + name + '.ai.json', 'w') as outfile:
-            json.dump({
-                "languages": ["javascript", "python", "dart", "java", "c++", "c#"],
-                "model": "gpt-3.5-turbo",
-                "temperature": 0,
-                "top_p": 1,
-                "frequency_penalty": 0,
-                "presence_penalty": 0,
-                "role_prompt": self.role_prompt,
-                "messages": messages
-            }, outfile)
+            json.dump(obj, outfile)
